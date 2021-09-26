@@ -32,7 +32,7 @@ async def add_to_playlist(_, message: Message):
     if Config.ADMIN_ONLY == "Y":
         admins = await get_admins(Config.CHAT)
         if message.from_user.id not in admins:
-            await message.reply_sticker("CAADBQADsQIAAtILIVYld1n74e3JuQI")
+            await message.reply_sticker("CAACAgUAAx0CXw6jfwACQnJhT9vLUb8x_kw28wKMI55Esarx4AAC0AADHAYrDe9B4Ulda8xgIQQ")
             return
     type=""
     yturl=""
@@ -67,7 +67,7 @@ async def add_to_playlist(_, message: Message):
                 type="query"
                 ysearch=query
         else:
-            await message.reply_text("You Didn't gave me anything to play.Reply to a video or a youtube link.")
+            await message.reply_text("Hmm . . .Reply to a video or a youtube link.")
             return
     user=f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
     if type=="video":
@@ -134,7 +134,7 @@ async def add_to_playlist(_, message: Message):
 @Client.on_message(filters.command(["leave", f"leave@{Config.BOT_USERNAME}"]) & admin_filter)
 async def leave_voice_chat(_, m: Message):
     if not Config.CALL_STATUS:
-        return await m.reply("Not joined any voicechat.")
+        return await m.reply("Not joined voicechat.")
     await leave_call()
     await m.reply("Succesfully left videochat.")
 
@@ -143,7 +143,7 @@ async def leave_voice_chat(_, m: Message):
 @Client.on_message(filters.command(["shuffle", f"shuffle@{Config.BOT_USERNAME}"]) & admin_filter & (filters.chat(Config.CHAT) | filters.private))
 async def shuffle_play_list(client, m: Message):
     if not Config.CALL_STATUS:
-        return await m.reply("Not joined any voicechat.")
+        return await m.reply("Not joined voicechat.")
     else:
         if len(Config.playlist) > 2:
             await m.reply_text(f"Playlist Shuffled.")
@@ -156,7 +156,7 @@ async def shuffle_play_list(client, m: Message):
 @Client.on_message(filters.command(["clearplaylist", f"clearplaylist@{Config.BOT_USERNAME}"]) & admin_filter & (filters.chat(Config.CHAT) | filters.private))
 async def clear_play_list(client, m: Message):
     if not Config.CALL_STATUS:
-        return await m.reply("Not joined any voicechat.")
+        return await m.reply("Not joined voicechat.")
     if not Config.playlist:
         return await m.reply("Playlist is empty. May be Live streaming.")  
     Config.playlist.clear()   
@@ -203,7 +203,7 @@ async def stream(client, m: Message):
     if match:
         stream_link=await get_link(link)
         if not stream_link:
-            return await m.reply("This is an invalid link.")
+            return await m.reply("This is an invalid link rip.")
     else:
         stream_link=link
     k, msg=await stream_from_link(stream_link)
@@ -214,20 +214,20 @@ async def stream(client, m: Message):
     
 
 
-admincmds=["yplay", "leave", "pause", "resume", "skip", "restart", "volume", "shuffle", "clearplaylist", "export", "import", "update", 'replay', 'logs', 'stream', f'stream@{Config.BOT_USERNAME}', f'logs@{Config.BOT_USERNAME}', f"replay@{Config.BOT_USERNAME}", f"yplay@{Config.BOT_USERNAME}", f"leave@{Config.BOT_USERNAME}", f"pause@{Config.BOT_USERNAME}", f"resume@{Config.BOT_USERNAME}", f"skip@{Config.BOT_USERNAME}", f"restart@{Config.BOT_USERNAME}", f"volume@{Config.BOT_USERNAME}", f"shuffle@{Config.BOT_USERNAME}", f"clearplaylist@{Config.BOT_USERNAME}", f"export@{Config.BOT_USERNAME}", f"import@{Config.BOT_USERNAME}", f"update@{Config.BOT_USERNAME}"]
+admincmds=["leave", "pause", "resume", "skip", "restart", "volume", "shuffle", "clearplaylist", "export", "import", "update", 'replay', 'logs', 'stream', f'stream@{Config.BOT_USERNAME}', f'logs@{Config.BOT_USERNAME}', f"replay@{Config.BOT_USERNAME}", f"yplay@{Config.BOT_USERNAME}", f"leave@{Config.BOT_USERNAME}", f"pause@{Config.BOT_USERNAME}", f"resume@{Config.BOT_USERNAME}", f"skip@{Config.BOT_USERNAME}", f"restart@{Config.BOT_USERNAME}", f"volume@{Config.BOT_USERNAME}", f"shuffle@{Config.BOT_USERNAME}", f"clearplaylist@{Config.BOT_USERNAME}", f"export@{Config.BOT_USERNAME}", f"import@{Config.BOT_USERNAME}", f"update@{Config.BOT_USERNAME}"]
 
 @Client.on_message(filters.command(admincmds) & ~admin_filter & (filters.chat(Config.CHAT) | filters.private))
 async def notforu(_, m: Message):
-    await _.send_cached_media(chat_id=m.chat.id, file_id="CAADBQADEgQAAtMJyFVJOe6-VqYVzAI", caption="You Are Not Authorized", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('⚡️Join Here', url='https://t.me/ZauteKm')]]))
+    await _.send_cached_media(chat_id=m.chat.id, file_id="CAACAgUAAx0CXw6jfwACQnJhT9vLUb8x_kw28wKMI55Esarx4AAC0AADHAYrDe9B4Ulda8xgIQQ", caption="You Are Not Authorized", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('⚡️Join Here', url='https://t.me/ZauteKm')]]))
 allcmd = ["play", "player", f"play@{Config.BOT_USERNAME}", f"player@{Config.BOT_USERNAME}"] + admincmds
 
 @Client.on_message(filters.command(allcmd) & ~filters.chat(Config.CHAT) & filters.group)
 async def not_chat(_, m: Message):
     buttons = [
         [
-            InlineKeyboardButton('⚡️Make Own Bot', url='https://github.com/ZauteKm/vcVideoPlayer'),
-            InlineKeyboardButton('🧩 Join Here', url='https://t.me/tgbotsproject'),
+            InlineKeyboardButton('Owner', url='https://t.me/Shoto_GirlFriend_777/604'),
+            InlineKeyboardButton('Join my group 💗', url='https://t.me/animefan_club777'),
         ]
         ]
-    await m.reply("<b>You can't use this bot in this group, for that you have to make your own bot from the [SOURCE CODE](https://github.com/Zautekm/VCVideoPlayBot) below.</b>", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(buttons))
+    await m.rip disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(buttons))
 
